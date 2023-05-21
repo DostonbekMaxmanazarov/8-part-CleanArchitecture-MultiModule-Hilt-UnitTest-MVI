@@ -1,5 +1,5 @@
 # 6-part-CleanArchitecture-MultiModule-Mvvm-Hilt
-Project: This project is simply a user authorization project". Contained: Recommended app architecture, MultiModule, Mvvm, Hilt(Dependency Injection).
+> Project: This project is simply a user authorization project". Contained: Recommended app architecture, MultiModule, Mvvm, Hilt(Dependency Injection).
 
 Androidni loyihalarni ishlab chiqishda [Hilt]{https://dagger.dev/hilt/} - bu Google tomonidan taqdim etilgan dependency injection (DI) frameworkidir. U DI frameworki Dagger ustiga qurilgan. Hilt Android ilovamizdagi dependencylarni sozlash va boshqarish jarayonini soddalashtiradi.
 
