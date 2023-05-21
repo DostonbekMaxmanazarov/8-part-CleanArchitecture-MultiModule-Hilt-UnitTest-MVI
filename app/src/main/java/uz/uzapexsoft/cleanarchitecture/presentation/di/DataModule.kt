@@ -3,6 +3,9 @@ package uz.uzapexsoft.cleanarchitecture.presentation.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import uz.uzapexsoft.data.mapper.SingleMapper
 import uz.uzapexsoft.data.mapper.impl.AuthenticationRequestMapToDomain
 import uz.uzapexsoft.data.mapper.impl.SaveAuthenticationParamMapToStorage
@@ -13,31 +16,37 @@ import uz.uzapexsoft.data.storage.impl.AuthStorageSharedPrefImpl
 import uz.uzapexsoft.domain.models.Authentication
 import uz.uzapexsoft.domain.models.params.RegistrationParam
 import uz.uzapexsoft.domain.repository.AuthRepository
+import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DataModule {
 
     @Provides
-    fun provideAuthStorage(context: Context): AuthStorageSharedPref =
-            AuthStorageSharedPrefImpl(context = context)
+    @Singleton
+    fun provideAuthStorage(@ApplicationContext context: Context): AuthStorageSharedPref =
+        AuthStorageSharedPrefImpl(context = context)
 
     @Provides
+    @Singleton
     fun providesSaveAuthParamMapToStorage(): SingleMapper<RegistrationParam, AuthenticationRequest> =
-            SaveAuthenticationParamMapToStorage()
+        SaveAuthenticationParamMapToStorage()
 
     @Provides
+    @Singleton
     fun provideAuthRequestMapToDomain(): SingleMapper<AuthenticationRequest, Authentication> =
-            AuthenticationRequestMapToDomain()
+        AuthenticationRequestMapToDomain()
 
     @Provides
+    @Singleton
     fun provideAuthRepository(
         authStorage: AuthStorageSharedPref,
         authRequestMapToDomain: SingleMapper<AuthenticationRequest, Authentication>,
         saveAuthParamMapToStorage: SingleMapper<RegistrationParam, AuthenticationRequest>
     ): AuthRepository = AuthRepositoryImpl(
-            authStorage = authStorage,
-            authRequestMapToDomain = authRequestMapToDomain,
-            saveAuthParamMapToStorage = saveAuthParamMapToStorage
+        authStorage = authStorage,
+        authRequestMapToDomain = authRequestMapToDomain,
+        saveAuthParamMapToStorage = saveAuthParamMapToStorage
     )
 
 }

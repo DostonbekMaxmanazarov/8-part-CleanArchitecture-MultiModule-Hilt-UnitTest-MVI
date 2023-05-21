@@ -4,23 +4,22 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import uz.uzapexsoft.cleanarchitecture.R
-import uz.uzapexsoft.cleanarchitecture.application.App
 import uz.uzapexsoft.cleanarchitecture.databinding.FragmentLoginBinding
 import uz.uzapexsoft.cleanarchitecture.presentation.vm.LoginViewModel
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var vm: LoginViewModel
+    private val vm: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentLoginBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        (requireContext().applicationContext as App).appComponent.inject(this)
         initClickView()
         observeData()
     }
@@ -36,7 +35,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun observeData() {
         vm.resultLiveData.observe(viewLifecycleOwner) { success ->
             binding.tvSuccess.text = success.toString()
-            if (success) Toast.makeText(requireContext(), R.string.success, Toast.LENGTH_SHORT).show()
+            if (success) Toast.makeText(requireContext(), R.string.success, Toast.LENGTH_SHORT)
+                .show()
             else Toast.makeText(requireContext(), R.string.failed, Toast.LENGTH_SHORT).show()
         }
     }
