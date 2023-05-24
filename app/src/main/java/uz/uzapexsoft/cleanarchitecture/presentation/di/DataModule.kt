@@ -14,7 +14,7 @@ import uz.uzapexsoft.data.repository.AuthRepositoryImpl
 import uz.uzapexsoft.data.storage.AuthStorageSharedPref
 import uz.uzapexsoft.data.storage.impl.AuthStorageSharedPrefImpl
 import uz.uzapexsoft.domain.models.Authentication
-import uz.uzapexsoft.domain.models.params.RegistrationParam
+import uz.uzapexsoft.domain.models.params.SaveRegistrationParam
 import uz.uzapexsoft.domain.repository.AuthRepository
 import javax.inject.Singleton
 
@@ -29,7 +29,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providesSaveAuthParamMapToStorage(): SingleMapper<RegistrationParam, AuthenticationRequest> =
+    fun providesSaveAuthParamMapToStorage(): SingleMapper<SaveRegistrationParam, AuthenticationRequest> =
         SaveAuthenticationParamMapToStorage()
 
     @Provides
@@ -42,7 +42,7 @@ class DataModule {
     fun provideAuthRepository(
         authStorage: AuthStorageSharedPref,
         authRequestMapToDomain: SingleMapper<AuthenticationRequest, Authentication>,
-        saveAuthParamMapToStorage: SingleMapper<RegistrationParam, AuthenticationRequest>
+        saveAuthParamMapToStorage: SingleMapper<SaveRegistrationParam, AuthenticationRequest>
     ): AuthRepository = AuthRepositoryImpl(
         authStorage = authStorage,
         authRequestMapToDomain = authRequestMapToDomain,

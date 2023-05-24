@@ -25,7 +25,6 @@ class AuthStorageSharedPrefImpl(context: Context) : AuthStorageSharedPref {
         val email = sharedPreference.getString(EMAIL, DEFAULT_EMAIL) ?: DEFAULT_EMAIL
         val password = sharedPreference.getString(PASSWORD, DEFAULT_PASSWORD) ?: DEFAULT_PASSWORD
         val phoneNumber = sharedPreference.getString(PHONE_NUMBER, DEFAULT_PHONE_NUMBER) ?: DEFAULT_PHONE_NUMBER
-
         return AuthenticationRequest(email = email, password = password, phoneNumber = phoneNumber)
     }
 }

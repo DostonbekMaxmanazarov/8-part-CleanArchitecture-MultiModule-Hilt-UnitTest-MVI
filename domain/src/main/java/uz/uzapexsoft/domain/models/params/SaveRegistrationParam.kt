@@ -1,6 +1,6 @@
 package uz.uzapexsoft.domain.models.params
 
-data class RegistrationParam(
+data class SaveRegistrationParam(
     val email: String = "",
     val password: String = "",
     val phoneNumber: String = "",
