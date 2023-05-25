@@ -6,11 +6,8 @@ import uz.uzapexsoft.domain.usecase.SaveAuthUseCase
 import uz.uzapexsoft.domain.utils.isValidationEmail
 import uz.uzapexsoft.domain.utils.isValidationPassword
 import uz.uzapexsoft.domain.utils.isValidationPhoneNumber
-import javax.inject.Inject
 
-class SaveAuthUseCaseImpl @Inject constructor(
-    val authRepository: AuthRepository
-) : SaveAuthUseCase {
+class SaveAuthUseCaseImpl(val authRepository: AuthRepository) : SaveAuthUseCase {
     override fun invoke(param: SaveRegistrationParam): Boolean {
         val oldAuthentication = authRepository.getAuthentication()
 

@@ -11,6 +11,7 @@ import uz.uzapexsoft.domain.repository.AuthRepository
 import uz.uzapexsoft.domain.models.params.SaveRegistrationParam
 
 class SaveAuthUseCaseTest {
+
     private val authRepository = mock<AuthRepository>()
 
     @AfterEach
@@ -38,7 +39,7 @@ class SaveAuthUseCaseTest {
         Mockito.`when`(authRepository.getAuthentication()).thenReturn(testAuthentication)
 
         val expected = true
-        val testRegistrationParam = SaveRegistrationParam(phoneNumber = "+998 99 000 00 00", email = "aaa@aa.uz", password = "12345A++", confirmPassword = "12345A++")
+        val testRegistrationParam = SaveRegistrationParam(phoneNumber = "+998 99 000 00 01", email = "aaa@aa.uz", password = "12345A++", confirmPassword = "12345A++")
         Mockito.`when`(authRepository.saveAuthentication(saveParam = testRegistrationParam)).thenReturn(expected)
 
         val useCase = SaveAuthUseCaseImpl(authRepository = authRepository)
@@ -54,7 +55,7 @@ class SaveAuthUseCaseTest {
         Mockito.`when`(authRepository.getAuthentication()).thenReturn(testAuthentication)
 
         val expected = false
-        val testRegistrationParam = SaveRegistrationParam(phoneNumber = "+998 99 000 00 00", email = "aaa@aa.uz", password = "12345A++", confirmPassword = "12345A++")
+        val testRegistrationParam = SaveRegistrationParam(phoneNumber = "+998 99 000 00 01", email = "aaa@aa.uz", password = "12345A++", confirmPassword = "12345A++")
         Mockito.`when`(authRepository.saveAuthentication(saveParam = testRegistrationParam)).thenReturn(expected)
 
         val useCase = SaveAuthUseCaseImpl(authRepository = authRepository)
