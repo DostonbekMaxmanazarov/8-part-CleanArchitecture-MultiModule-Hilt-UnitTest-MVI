@@ -70,6 +70,14 @@
         app:layout_constraintTop_toBottomOf="@id/etConfirmPassword" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvResult"
+        style="@style/MediumTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSaveData" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDoYouHaveAccount"
         style="@style/MediumTextView"
         android:text="@string/do_you_have_an_account"

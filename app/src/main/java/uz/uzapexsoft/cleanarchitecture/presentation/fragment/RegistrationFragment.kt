@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import uz.uzapexsoft.cleanarchitecture.R
 import uz.uzapexsoft.cleanarchitecture.databinding.FragmentRegistrationBinding
+import uz.uzapexsoft.cleanarchitecture.presentation.models.events.RegistrationEvent
 import uz.uzapexsoft.cleanarchitecture.presentation.utils.extensions.replaceFragment
 import uz.uzapexsoft.cleanarchitecture.presentation.vm.RegistrationViewModel
 
@@ -31,12 +32,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             val password = etPassword.text.toString()
             val phoneNumber = etPhoneNumber.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
-            vm.registration(
-                email = email,
-                password = password,
-                phoneNumber = phoneNumber,
-                confirmPassword = confirmPassword
-            )
+            val event = RegistrationEvent(email = email, password = password, phoneNumber = phoneNumber, confirmPassword = confirmPassword)
+            vm.send(event = event)
         }
 
         tvLogin.setOnClickListener {
@@ -49,9 +46,9 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     }
 
     private fun observeData() {
-        vm.resultLiveData.observe(viewLifecycleOwner) { success ->
-            if (success) Toast.makeText(requireContext(), R.string.success, Toast.LENGTH_SHORT)
-                .show()
+        vm.stateLiveData.observe(viewLifecycleOwner) { state ->
+            binding.tvResult.text = "${state.saveResult}"
+            if (state.saveResult) Toast.makeText(requireContext(), R.string.success, Toast.LENGTH_SHORT).show()
             else Toast.makeText(requireContext(), R.string.failed, Toast.LENGTH_SHORT).show()
         }
     }

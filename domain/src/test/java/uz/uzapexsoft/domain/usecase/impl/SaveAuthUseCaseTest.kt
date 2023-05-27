@@ -26,7 +26,7 @@ class SaveAuthUseCaseTest {
 
         val useCase = SaveAuthUseCaseImpl(authRepository = authRepository)
         val testRegistrationParam = SaveRegistrationParam(phoneNumber = "+998 99 000 00 00")
-        val actual = useCase(param = testRegistrationParam)
+        val actual = useCase.execute(param = testRegistrationParam)
 
         val expected = true
         Assertions.assertEquals(expected, actual)
@@ -43,7 +43,7 @@ class SaveAuthUseCaseTest {
         Mockito.`when`(authRepository.saveAuthentication(saveParam = testRegistrationParam)).thenReturn(expected)
 
         val useCase = SaveAuthUseCaseImpl(authRepository = authRepository)
-        val actual = useCase(param = testRegistrationParam)
+        val actual = useCase.execute(param = testRegistrationParam)
 
         Assertions.assertEquals(expected, actual)
         Mockito.verify(authRepository, Mockito.times(1)).saveAuthentication(saveParam = testRegistrationParam)
@@ -59,7 +59,7 @@ class SaveAuthUseCaseTest {
         Mockito.`when`(authRepository.saveAuthentication(saveParam = testRegistrationParam)).thenReturn(expected)
 
         val useCase = SaveAuthUseCaseImpl(authRepository = authRepository)
-        val actual = useCase(param = testRegistrationParam)
+        val actual = useCase.execute(param = testRegistrationParam)
 
         Assertions.assertEquals(expected, actual)
         Mockito.verify(authRepository, Mockito.times(1)).saveAuthentication(saveParam = testRegistrationParam)

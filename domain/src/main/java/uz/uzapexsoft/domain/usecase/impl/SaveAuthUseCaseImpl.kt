@@ -17,10 +17,8 @@ class SaveAuthUseCaseImpl(val authRepository: AuthRepository) : SaveAuthUseCase 
         if (param.email.isValidationEmail() &&
             param.password.isValidationPassword() &&
             param.phoneNumber.isValidationPhoneNumber() &&
-            param.password == param.confirmPassword
-        ) {
+            param.password == param.confirmPassword)
             return authRepository.saveAuthentication(saveParam = param)
-        }
 
         return false
     }
